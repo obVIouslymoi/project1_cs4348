@@ -1,9 +1,13 @@
-package project1;
+package project1_cs4348;
 
 public class Encryption {                                                               //create class
     static String key = null;                                                           //create key variable
     public static void completeInput(String userInput) {                                //function to deal with valid input line
-        String[] wordsArr = userInput.split(" ", 2);                                    //split command ([0]) and argument ([1])
+        if (!userInput.contains(" ")){                                                //if there is only 1 word in the entry
+            System.out.println("ERROR No arguments given");                           //end and state invalid input
+            return;   
+        }
+        String[] wordsArr = userInput.split(" ", 2);                        //split command ([0]) and argument ([1])
         switch (wordsArr[0]) {                                                          //switch statement to match and deal with command
             case "PASSKEY":                                                             //sets passkey with argument
                 key = wordsArr[1];                                                      //set passkey

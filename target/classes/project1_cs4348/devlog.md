@@ -112,3 +112,16 @@ March 15, 2025 - 12:16 PM
 I realized what my mistake was! My project was missing important code files necessary for a project. This happened because I first created code files for each individual program rather than doing this after creating the project. This would have ensured my code could run. I'm not sure how to add the necesary files, so I will be creating a new repo and copying files over. I have copied the necesary devlog entries before this and labelled it as such. In my commit, I will try to add screenshots of past repo commits to prove my work for this new repo. This is what I will be doing now. Once I can fix this, I'll move forward with editing the encryption program.
 
 -------------------------------------------------------------------
+
+March 12, 2025 - 12:30 PM
+
+I have successfully copied the develog over. I will work on copying the code over next. Here are the screenshots.
+![image](https://github.com/user-attachments/assets/9a38124f-6899-47ce-bc10-454366371a31)
+![image](https://github.com/user-attachments/assets/81303308-6b23-4081-bc57-f301238ca139)
+![image](https://github.com/user-attachments/assets/ab188706-1a2c-434d-8f69-ae8bfd32f696)
+
+-------------------------------------------------------------------
+
+March
+
+-------------------------------------------------------------------
