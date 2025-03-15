@@ -15,6 +15,7 @@ public class Encryption {                                                       
         switch (wordsArr[0]) {                                                          //switch statement to match and deal with command
             case "PASSKEY":                                                             //sets passkey with argument
                 key = wordsArr[1];                                                      //set passkey
+                key = key.replaceAll("\\s", "");                      //remove spaces from passkey
                 System.out.println("RESULT");                                         //print sucess statement
                 break;
             case "ENCRYPT":                                                             //encrypts
