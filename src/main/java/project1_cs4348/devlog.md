@@ -113,7 +113,7 @@ I realized what my mistake was! My project was missing important code files nece
 
 -------------------------------------------------------------------
 
-March 12, 2025 - 12:30 PM
+March 15, 2025 - 12:30 PM
 
 I have successfully copied the develog over. I will work on copying the code over next. Here are the screenshots.
 ![image](https://github.com/user-attachments/assets/9a38124f-6899-47ce-bc10-454366371a31)
@@ -122,8 +122,14 @@ I have successfully copied the develog over. I will work on copying the code ove
 
 -------------------------------------------------------------------
 
-March 12, 2025 - 1:00
+March 15, 2025 - 1:00 PM
 
 I have copied over all remaining code files, and I started debugging the Encryption program. When doing so, I found that my code was initially throwing errors for lines with 1 input. I thought I could check for this by throwing an error for inputs with only one word. However, upon testing, I realized that this would fail and cause an infite loop as QUIT counts as 1 word and throw an error. ENCRYPT and DECRYPT seemed to work for the example provided. I need to test this for multiple words, spaces, and numbers/symbols, as well as account for QUIT.
+
+-------------------------------------------------------------------
+
+March 15, 2025 - 1:40 PM
+
+The encryption program works! I added an if statement to first check if the command was quit. If it was, the program ended. If not, it would then check to see if the following line had a command and arguments with it, and it would throw an error if not. This made sure that QUIT would properly be taken care of and that arguemnts were required. The code also works for spaces. numbers, and symbols. Spaces are ignored and removed, but numbers/symbols cause the program to throw an error message but continue the program.
 
 -------------------------------------------------------------------
