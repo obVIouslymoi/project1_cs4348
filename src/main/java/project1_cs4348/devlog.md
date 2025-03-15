@@ -122,6 +122,8 @@ I have successfully copied the develog over. I will work on copying the code ove
 
 -------------------------------------------------------------------
 
-March
+March 12, 2025 - 1:00
+
+I have copied over all remaining code files, and I started debugging the Encryption program. When doing so, I found that my code was initially throwing errors for lines with 1 input. I thought I could check for this by throwing an error for inputs with only one word. However, upon testing, I realized that this would fail and cause an infite loop as QUIT counts as 1 word and throw an error. ENCRYPT and DECRYPT seemed to work for the example provided. I need to test this for multiple words, spaces, and numbers/symbols, as well as account for QUIT.
 
 -------------------------------------------------------------------
