@@ -20,7 +20,7 @@ public class Project1_cs4348 {
                 userInput = userInput.toUpperCase();                                    //turn to uppercase
                 Encryption.completeInput(userInput);                                               //complete line given
             } else {                                                                    //invalid input
-                System.out.println("Invalid input line");                               //error message
+                System.out.println("ERROR Non-alaphabet characters detected");                               //error message
             }
         }
         System.out.println("All inputs completed.");                                    //completed all inputs
