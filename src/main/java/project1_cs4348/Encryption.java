@@ -1,57 +1,72 @@
 package project1_cs4348;
+import java.util.Scanner; //imports and packages
 
-public class Encryption {                                                               //create class
-    static String key = null;                                                           //create key variable
-    public static void completeInput(String userInput) {                                //function to deal with valid input line
-        if (userInput.equalsIgnoreCase("QUIT")){                          //if the only 1 word is QUIT, quit program.
-            System.exit(0);                                                      //exit program
+public class Encryption {
+    static String key = null; //inititalize key for use throughout class
+    static Scanner scanIn = new Scanner(System.in); //create scanner    
+
+    public static void completeInput() { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
+        while (scanIn.hasNextLine()) { //while there are inputs
+            String userInput = scanIn.nextLine(); //get input line
+            if (userInput.isEmpty() || !(userInput.matches("^[a-zA-Z\\s]*$"))) { //make sure valid inputs
+                System.out.println("ERROR Non-alaphabet characters detected"); //throw error if invalid
+            } else {
+                core(userInput); //call encryption logic function to handle individual line (if valid)
+            }
+        }
+    }
+
+    public static void core (String userLineInput) {    //handles line by line encryption
+        userLineInput = userLineInput.toUpperCase();    //turns to uppercase
+        if (userLineInput.equalsIgnoreCase("QUIT")){    //check if quit (first to make QUIT is not ignored by following clause)
+            scanIn.close(); //close scanner as program is exited
+            System.exit(0);//exit program
             return;   
         }
-        else if (!userInput.contains(" ")){                                           //if there is only 1 word in the entry
-            System.out.println("ERROR No arguments given");                           //end and state invalid input as only command was given
-            return;   
+        else if (!userLineInput.contains(" ")){ //check if only command was given
+            System.out.println("ERROR No arguments given"); //print error
+            return;
         } 
-        String[] wordsArr = userInput.split(" ", 2);                        //split command ([0]) and argument ([1])
-        switch (wordsArr[0]) {                                                          //switch statement to match and deal with command
-            case "PASSKEY":                                                             //sets passkey with argument
-                key = wordsArr[1];                                                      //set passkey
-                key = key.replaceAll("\\s", "");                      //remove spaces from passkey
-                System.out.println("RESULT");                                         //print sucess statement
+        String[] wordsArr = userLineInput.split(" ", 2); //split into command and argument at first space
+        switch (wordsArr[0]) { //match command
+            case "PASSKEY": 
+                key = wordsArr[1]; //set argument as key
+                key = key.replaceAll("\\s", ""); //remove spaces from key
+                System.out.println("RESULT"); //print success statement
                 break;
-            case "ENCRYPT":                                                             //encrypts
-                if (key == null) {                                                      //checks if key exists
-                    System.out.println("ERROR Password not set");                     //error message for no key
+            case "ENCRYPT":
+                if (key == null) { //check if there are no keys set
+                    System.out.println("ERROR Password not set"); //print error message
                     break;
                 }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], true));         //success --> print message and new word
+                System.out.println("RESULT " + applyCipher(wordsArr[1], true)); //else, print success with encrypted result which is called via method to encrypt (true)
                 break;
-            case "DECRYPT":                                                             //decrypts
-                if (key == null) {                                                      //checks if key exists
-                    System.out.println("ERROR Password not set");                     //error message for no key
+            case "DECRYPT":
+                if (key == null) { //check if there are no keys set
+                    System.out.println("ERROR Password not set"); //print error message
                     return;
                 }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], false));        //success --> print message and decrypted
+                System.out.println("RESULT " + applyCipher(wordsArr[1], false)); //else, print success with encrypted result which is called via method to decrpyt (false)
                 break;
-            default:                                                                    //wrong command
-                System.out.println("ERROR " + wordsArr[1]);                             //print error and remaining line
+            default:
+                System.out.println("ERROR " + wordsArr[1]); //incorrect command/nonmatching --> print error with argument
         }
     }
 
-    public static String applyCipher(String input, boolean cipherDirection) {           //applies cipher to input word while direction determines (en = true/de = false)crypt
-        String outcome = "";                                                            //creates result string
-        char inEach;                                                                    //creates char variable to travel by each letter
-        input = input.replaceAll("[^A-Z]", "");                       //remove spaces
-        for (int i = 0, j = 0; i != input.length(); i++) {                              //loop until each letter of argument is decrypted
-            inEach = input.charAt(i);                                                   //get current input letter
-            if (cipherDirection) {                                                      //if true = encrypt
-                outcome += (char)((inEach + key.charAt(j) - 2 * 'A') % 26 + 'A');       //encrypt letter by calculating and applying Caesar shift --> append encrypted letter to outcome
+    public static String applyCipher(String input, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
+        String outcome = ""; //initialize final word to be printed
+        char inEach; //initialize char variable to track each letter of words
+        input = input.replaceAll("[^A-Z]", ""); //remove spaces
+        for (int i = 0, j = 0; i != input.length(); i++) { //start applying cipher
+            inEach = input.charAt(i); //track each letter
+            if (cipherDirection) { //encrypt
+                outcome += (char)((inEach + key.charAt(j) - 2 * 'A') % 26 + 'A'); //calculate encrypted letter and append to end of final word
             }
-            else {                                                                      //if false = decrypt
-                outcome += (char)((inEach - key.charAt(j) + 26) % 26 + 'A');            //decrypt letter by calculating and reverse applying Caesar shift --> append decrypted letter to outcome
+            else {//decrypt
+                outcome += (char)((inEach - key.charAt(j) + 26) % 26 + 'A'); //calculate decrypted letter and append to end of final word
             }
-            j = ++j % key.length();                                                     //move to next for key
+            j = ++j % key.length(); //move to next letter for chipher
         }
-        return outcome;                                                                 //return final outcome
+        return outcome; //return final en/decrypted word
     }
 }
-

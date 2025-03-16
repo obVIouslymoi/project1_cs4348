@@ -154,4 +154,18 @@ I made sure the passkey will ignore spaces. I will now be moving onto the logger
 --> write each input into file
 
 I will now work on implementing this.
+
+-------------------------------------------------------------------
+
+March 15, 2025 - 10:40 PM
+
+I put together the logger file and it works! I started by creating the files and importing the date formatter. I was only able to complete making the file when I put everyhting in a try-catch. After, I used another similar scan + while loop to get user input. This time, I checked for QUIT and only one arguments early. After, I split the line into action (which I turned to all-caps), the message, and time. I finally used the printwriter to write this to the file. Upon testing, I found that this worked! Testing the program also resulted in the test.txt file were the logs can be seen.
+
+-------------------------------------------------------------------
+
+March 15, 2025 - 11:13 PM
+
+For this and the encryption file, I saw that too much was written into the main method. Because of this, I went back to separate and make my code more independent. I did this for the Encryption file as well. Now, both programs can only be accesssed by 2 methods. I also went back and added comments.
+
+After completing both the logger and encryption program, I think I have a better idea of how all three will be called and how independet they will be. I will be taking this into account as I work on my driver program. I am going to look at the driver program now and come back to list my notes and gameplan.
 -------------------------------------------------------------------
