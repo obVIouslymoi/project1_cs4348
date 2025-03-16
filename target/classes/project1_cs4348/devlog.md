@@ -168,4 +168,22 @@ March 15, 2025 - 11:13 PM
 For this and the encryption file, I saw that too much was written into the main method. Because of this, I went back to separate and make my code more independent. I did this for the Encryption file as well. Now, both programs can only be accesssed by 2 methods. I also went back and added comments.
 
 After completing both the logger and encryption program, I think I have a better idea of how all three will be called and how independet they will be. I will be taking this into account as I work on my driver program. I am going to look at the driver program now and come back to list my notes and gameplan.
+
+-------------------------------------------------------------------
+
+March 15, 2025 - 11:45 PM
+
+For the driver program, here are my thoughts and gameplan:
+
+Thoughts/Gameplan:
+--> I think I will rewire the current main file and turn it into the Driver program file
+--> 2 processors (1 for logger and 1 for encryption)
+--> new history file will be a separate file that is created on start of loop
+---> must be closed and deleted at quit
+    --> have 2 history functions within get-input loo (ensure getting inputs after)
+        --> 1: to print history
+        --> 2: to track current location of tracker/cursor/new line 
+--> print menu on start
+--> ask for command (part of loop)
+
 -------------------------------------------------------------------
