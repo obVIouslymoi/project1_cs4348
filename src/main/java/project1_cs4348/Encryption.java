@@ -2,7 +2,7 @@ package project1_cs4348;
 
 public class Encryption {
 
-   /* public static void completeInput(String userInput, String key) { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
+    /* public static void completeInput(String userInput, String key) { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
             if (userInput.isEmpty() || !(userInput.matches("^[a-zA-Z\\s]*$"))) { //make sure valid inputs
                 System.out.println("ERROR Non-alaphabet characters detected"); //throw error if invalid
                 return;
@@ -47,26 +47,24 @@ public class Encryption {
                 System.out.println("ERROR " + wordsArr[1]); //incorrect command/nonmatching --> print error with argument
         }
     } */
-/////////////////////////////////////////////////////////////////////////////////////////////////
-    public static String applyCipher(String input, String key,  boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    public static String applyCipher(String input, String key, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
         String outcome = ""; //initialize final word to be printed
         char inEach; //initialize char variable to track each letter of words
         input = input.replaceAll("[^A-Z]", ""); //remove spaces
         for (int i = 0, j = 0; i != input.length(); i++) { //start applying cipher
             inEach = input.charAt(i); //track each letter
             if (cipherDirection) { //encrypt
-                outcome += (char)((inEach + key.charAt(j) - 2 * 'A') % 26 + 'A'); //calculate encrypted letter and append to end of final word
-            }
-            else {//decrypt
-                outcome += (char)((inEach - key.charAt(j) + 26) % 26 + 'A'); //calculate decrypted letter and append to end of final word
+                outcome += (char) ((inEach + key.charAt(j) - 2 * 'A') % 26 + 'A'); //calculate encrypted letter and append to end of final word
+            } else {//decrypt
+                outcome += (char) ((inEach - key.charAt(j) + 26) % 26 + 'A'); //calculate decrypted letter and append to end of final word
             }
             j = ++j % key.length(); //move to next letter for chipher
         }
         return outcome; //return final en/decrypted word
     }
 
-
-    public static void encrypt(String input, String key) { //
+    public static void encrypt(String input, String key) { //encrypt function
         if (key == null) { //check if there are no keys set
             System.out.println("ERROR Password not set"); //print error message
             return;
@@ -74,18 +72,12 @@ public class Encryption {
         System.out.println("RESULT " + applyCipher(input, key, true)); //else, print success with encrypted result which is called via method to encrypt (true)
     }
 
-    public static void decrypt(String input, String key) { //
+    public static void decrypt(String input, String key) { //decrypt function
         if (key == null) { //check if there are no keys set
             System.out.println("ERROR Password not set"); //print error message
             return;
         }
-        System.out.println("RESULT " + applyCipher(input, key, false)); //else, print success with encrypted result which is called via method to encrypt (true)
+        System.out.println("RESULT " + applyCipher(input, key, false)); //else, print success with encrypted result which is called via method to decrypt (false)
     }
-
-    public static void quit() { //
-        System.exit(0); //
-    }
-
-
 
 }
