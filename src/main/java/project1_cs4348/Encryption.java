@@ -1,25 +1,20 @@
 package project1_cs4348;
-import java.util.Scanner; //imports and packages
 
 public class Encryption {
-    static String key = null; //inititalize key for use throughout class
-    static Scanner scanIn = new Scanner(System.in); //create scanner    
 
-    public static void completeInput() { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
-        while (scanIn.hasNextLine()) { //while there are inputs
-            String userInput = scanIn.nextLine(); //get input line
+   /* public static void completeInput(String userInput, String key) { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
             if (userInput.isEmpty() || !(userInput.matches("^[a-zA-Z\\s]*$"))) { //make sure valid inputs
                 System.out.println("ERROR Non-alaphabet characters detected"); //throw error if invalid
+                return;
             } else {
-                core(userInput); //call encryption logic function to handle individual line (if valid)
+                core(userInput, key); //call encryption logic function to handle individual line (if valid)
             }
         }
-    }
+    
 
-    public static void core (String userLineInput) {    //handles line by line encryption
+    public static void core (String userLineInput, String key) {    //handles line by line encryption
         userLineInput = userLineInput.toUpperCase();    //turns to uppercase
         if (userLineInput.equalsIgnoreCase("QUIT")){    //check if quit (first to make QUIT is not ignored by following clause)
-            scanIn.close(); //close scanner as program is exited
             System.exit(0);//exit program
             return;   
         }
@@ -39,21 +34,21 @@ public class Encryption {
                     System.out.println("ERROR Password not set"); //print error message
                     break;
                 }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], true)); //else, print success with encrypted result which is called via method to encrypt (true)
+                System.out.println("RESULT " + applyCipher(wordsArr[1], key, true)); //else, print success with encrypted result which is called via method to encrypt (true)
                 break;
             case "DECRYPT":
                 if (key == null) { //check if there are no keys set
                     System.out.println("ERROR Password not set"); //print error message
                     return;
                 }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], false)); //else, print success with encrypted result which is called via method to decrpyt (false)
+                System.out.println("RESULT " + applyCipher(wordsArr[1], key, false)); //else, print success with encrypted result which is called via method to decrpyt (false)
                 break;
             default:
                 System.out.println("ERROR " + wordsArr[1]); //incorrect command/nonmatching --> print error with argument
         }
-    }
-
-    public static String applyCipher(String input, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
+    } */
+/////////////////////////////////////////////////////////////////////////////////////////////////
+    public static String applyCipher(String input, String key,  boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
         String outcome = ""; //initialize final word to be printed
         char inEach; //initialize char variable to track each letter of words
         input = input.replaceAll("[^A-Z]", ""); //remove spaces
@@ -69,4 +64,28 @@ public class Encryption {
         }
         return outcome; //return final en/decrypted word
     }
+
+
+    public static void encrypt(String input, String key) { //
+        if (key == null) { //check if there are no keys set
+            System.out.println("ERROR Password not set"); //print error message
+            return;
+        }
+        System.out.println("RESULT " + applyCipher(input, key, true)); //else, print success with encrypted result which is called via method to encrypt (true)
+    }
+
+    public static void decrypt(String input, String key) { //
+        if (key == null) { //check if there are no keys set
+            System.out.println("ERROR Password not set"); //print error message
+            return;
+        }
+        System.out.println("RESULT " + applyCipher(input, key, false)); //else, print success with encrypted result which is called via method to encrypt (true)
+    }
+
+    public static void quit() { //
+        System.exit(0); //
+    }
+
+
+
 }

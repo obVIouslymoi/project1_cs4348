@@ -1,4 +1,5 @@
-/*package project1;
+package project1_cs4348;
+
 import java.lang.*;
 import java.util.Scanner;
 public class MainMemory
@@ -22,4 +23,3 @@ public class MainMemory
 		}
 	}
 }
-*/
