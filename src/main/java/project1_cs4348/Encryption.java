@@ -1,54 +1,36 @@
 package project1_cs4348;
 
+import java.util.Scanner;
+
 public class Encryption {
+    static String key = null;
 
-    /* public static void completeInput(String userInput, String key) { //method to executively handle encryption program --> this will be the only program that needs to be called by main/driver
-            if (userInput.isEmpty() || !(userInput.matches("^[a-zA-Z\\s]*$"))) { //make sure valid inputs
-                System.out.println("ERROR Non-alaphabet characters detected"); //throw error if invalid
-                return;
-            } else {
-                core(userInput, key); //call encryption logic function to handle individual line (if valid)
-            }
-        }
-    
+   public static void main(String[] args) {
+       Scanner scanIn = new Scanner(System.in);
+        while (scanIn.hasNextLine()) { //loop while there are user inputs
+            String line = scanIn.nextLine(); 
+            String[] wordsArr = line.split(" ", 2); //split command and message                      
+            String command = wordsArr[0].toUpperCase().trim(); //first word is command and turn to all caps
+            String argument = wordsArr[1].toUpperCase().trim(); //second part is arguments
 
-    public static void core (String userLineInput, String key) {    //handles line by line encryption
-        userLineInput = userLineInput.toUpperCase();    //turns to uppercase
-        if (userLineInput.equalsIgnoreCase("QUIT")){    //check if quit (first to make QUIT is not ignored by following clause)
-            System.exit(0);//exit program
-            return;   
-        }
-        else if (!userLineInput.contains(" ")){ //check if only command was given
-            System.out.println("ERROR No arguments given"); //print error
-            return;
-        } 
-        String[] wordsArr = userLineInput.split(" ", 2); //split into command and argument at first space
-        switch (wordsArr[0]) { //match command
-            case "PASSKEY": 
-                key = wordsArr[1]; //set argument as key
-                key = key.replaceAll("\\s", ""); //remove spaces from key
-                System.out.println("RESULT"); //print success statement
-                break;
-            case "ENCRYPT":
-                if (key == null) { //check if there are no keys set
-                    System.out.println("ERROR Password not set"); //print error message
+            switch (command) { //match function with command
+                case "ENCRYPT":
+                    encrypt(argument);
                     break;
-                }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], key, true)); //else, print success with encrypted result which is called via method to encrypt (true)
-                break;
-            case "DECRYPT":
-                if (key == null) { //check if there are no keys set
-                    System.out.println("ERROR Password not set"); //print error message
-                    return;
-                }
-                System.out.println("RESULT " + applyCipher(wordsArr[1], key, false)); //else, print success with encrypted result which is called via method to decrpyt (false)
-                break;
-            default:
-                System.out.println("ERROR " + wordsArr[1]); //incorrect command/nonmatching --> print error with argument
+
+                case "DECRYPT":
+                    decrypt(argument);
+                    break;
+                
+                case "PASSKEY":
+                    setKey(argument);
+                    break;
+            }
+            
         }
-    } */
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-    public static String applyCipher(String input, String key, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
+        scanIn.close();
+   }
+    public static String applyCipher(String input, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
         String outcome = ""; //initialize final word to be printed
         char inEach; //initialize char variable to track each letter of words
         input = input.replaceAll("[^A-Z]", ""); //remove spaces
@@ -64,20 +46,25 @@ public class Encryption {
         return outcome; //return final en/decrypted word
     }
 
-    public static void encrypt(String input, String key) { //encrypt function
+    public static void encrypt(String input) { //encrypt function
         if (key == null) { //check if there are no keys set
             System.out.println("ERROR Password not set"); //print error message
             return;
         }
-        System.out.println("RESULT " + applyCipher(input, key, true)); //else, print success with encrypted result which is called via method to encrypt (true)
+        System.out.println("RESULT " + applyCipher(input, true)); //else, print success with encrypted result which is called via method to encrypt (true)
     }
 
-    public static void decrypt(String input, String key) { //decrypt function
+    public static void decrypt(String input) { //decrypt function
         if (key == null) { //check if there are no keys set
             System.out.println("ERROR Password not set"); //print error message
             return;
         }
-        System.out.println("RESULT " + applyCipher(input, key, false)); //else, print success with encrypted result which is called via method to decrypt (false)
+        System.out.println("RESULT " + applyCipher(input, false)); //else, print success with encrypted result which is called via method to decrypt (false)
+    }
+
+    public static void setKey(String xkey) { //decrypt function
+        key = xkey.toUpperCase().trim();
+        System.out.println("RESULT Password set"); //successful passkey set
     }
 
 }
