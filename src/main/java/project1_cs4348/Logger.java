@@ -11,7 +11,7 @@ public class Logger {
     public static void main(String[] args) {
         Scanner scanIn = new Scanner(System.in);
         while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
-            String userLineInput = scanIn.nextLine(); //get user input                                       
+            String userLineInput = scanIn.nextLine().toUpperCase().trim(); //get user input                                       
             switch (userLineInput) { //call correct log message based on command
                 case "START":
                     logStart();
@@ -47,7 +47,7 @@ public class Logger {
         String[] wordsArr = inputLine.split(" ", 2); //split command and message                      
         String action = wordsArr[0].toUpperCase(); //first word is action and turn to all caps
         String message = wordsArr[1]; //second part is message
-        System.out.println(time + " [" + action + "] " + message + ".");
+        System.out.println(time + " [" + action + "] " + message);
         return;
     }
 

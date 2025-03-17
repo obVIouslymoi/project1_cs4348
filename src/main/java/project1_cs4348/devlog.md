@@ -217,3 +217,9 @@ March 17, 2025 - 5:56 PM
 Both are files are done. I will now move on to working on the Driver file. I will be rewatching the video to make sure my understanding is correct, and I will push this branch to the main branch. For the Driver file, I need to add error checks for inputs and pipes to redirect input/output. I also need to create a loop similar to what was initially doen for Encryption to get user input for the menu.
 
 -------------------------------------------------------------------
+
+March 17, 2025 - 6:36 PM
+
+I had to go back and make both files executable on their own. Now I will be working on the process files.
+
+-------------------------------------------------------------------
