@@ -187,3 +187,11 @@ Thoughts/Gameplan:
 --> ask for command (part of loop)
 
 -------------------------------------------------------------------
+
+March 17, 2025 - 1:45 PM
+
+When attempting to complete the driver program, I realized that all my functions/methods for both Encryption and Logger were too "cetralized". I need to separate them so the the processes created in Driver can more easily access and use them. I will now work on this before/while working on the driver program. To make sure I can safely test this, I have opened this new branch.
+
+-------------------------------------------------------------------
+
+
