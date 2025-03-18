@@ -34,26 +34,27 @@ public class Driver {
             printHistory();
             System.out.println("[-1] Return to enter new word)");
             System.out.println("Select word by entering its corresponding number: ");
-            int choice = -1;
-            try {
-                choice = Integer.parseInt(scanIn.nextLine());
-                if (choice == -1) {
-                    return choice;
+            int choice = -1; //default no choice
+            try { //loop until valid choice is entered
+                choice = Integer.parseInt(scanIn.nextLine()); //get vchocie from user
+                if (choice == -1) { 
+                    return choice; 
                 }
-                while (!((choice > 0) && (choice <= (history.size()-1)))) {
+                while (!((choice > 0) && (choice <= (history.size()-1)))) { //check if valid inputs
                     choice = Integer.parseInt(scanIn.nextLine());
                     
                 }
             } catch (Exception e) {
                 System.out.println("ERROR Invalid type");
             }
-            return choice;
+            return choice; //return user choice
         } else {
-            return -1;
+            return -1; //return no choice
         }
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
+        //initialize for use througout
         Process logProcess = null;
         PrintWriter logWriter = null;
         Process encryptProcess = null;
@@ -82,7 +83,6 @@ public class Driver {
             e.printStackTrace();
         }
         logWriter.println("START"); //start logging
-        //..waitFor(); //attempts to debug missing file issue
 
         //////////////////////////////////////////////////////////////////////////////////////////CORE STARTS
         /// necessary varaibles
@@ -92,7 +92,7 @@ public class Driver {
             String sendCommand = ""; //variable that holds command for encrypt and resets for each menu choice
             System.out.println("Select command (password, encrypt, decrypt, history, quit): "); //print menu
             input = scanIn.nextLine().trim().toLowerCase(); //get user input
-            if(input.contains("\n")){
+            if(input.contains("\n")){ //clean user input
                 input.replaceAll("\n", "");
             }
 
@@ -124,11 +124,9 @@ public class Driver {
                     logWriter.println(storeEncryptOutTemp); //print to logger
                     //logProcess.waitFor(); //wait for completion
                     history.add(storeEncryptOutTemp.split(" ", 2)[1]); //add encrypted to history;
-
                     break;
 
                 case "decrypt":
-
                     sendCommand = sendCommand.concat(input); //add command to send to encrypt
                     sendCommand = sendCommand.concat(" "); // add space for arguments
 
@@ -157,7 +155,6 @@ public class Driver {
                     System.out.println(storeEncryptOutTemp);//print result to console
                     logWriter.println(storeEncryptOutTemp); //print to logger
                     history.add(storeEncryptOutTemp.split(" ", 2)[1]); //add encrypted to history;
-
                     break;
 
                 case "password":
@@ -169,12 +166,10 @@ public class Driver {
                     if ((!input.equals("")) && (input.matches("^[a-zA-Z]*$"))) { //if valid input
                         input = input.trim().toUpperCase();
                         sendCommand = sendCommand.concat(input); //complete command to send to change passkey
-
                     } else {
                         System.out.print("Invalid argument"); //invalid input --> break and send to main menu
                         break;
                     }
-
                     encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
                     logWriter.println(sendCommand); //send command to be logged
                     storeEncryptOutTemp = encryptReader.readLine();

@@ -287,10 +287,14 @@ I continued working after the initial submission and found that the missign clas
 
 March 18, 2025 - 1:36 PM
 
-Programs completed! I went through and fixed final bugs and will now me turnign in my final project. I am so sorry for the late submission, thank you for your understanding.
+Programs completed! I went through and fixed final bugs and will now be turning in my final project. I am so sorry for the late submission, thank you for your understanding.
 
 
 -------------------------------------------------------------------
+
+March 18, 2024 - 4:23 PM
+
+I initially thought the deadline was Monday, March 17 instead of Monday, March 24. My submission is actually not late, so sorry for the confusion!
 
 
 
