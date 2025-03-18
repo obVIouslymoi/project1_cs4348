@@ -36,9 +36,10 @@ public class Driver {
             System.out.println("Select word by entering its corresponding number: ");
             int choice = -1;
             try {
-                choice = scanIn.nextInt();
-                while ((choice < 0) && (choice > (history.size()-1))) {
-                    choice = scanIn.nextInt();
+                choice = Integer.parseInt(scanIn.nextLine());
+                while (!((choice > 0) && (choice <= (history.size()-1)))) {
+                    choice = Integer.parseInt(scanIn.nextLine());
+                    
                 }
             } catch (Exception e) {
                 System.out.println("ERROR Invalid type");
@@ -77,8 +78,8 @@ public class Driver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logWriter.println("START"); //attempts to debug
-        logProcess.waitFor(); //attempts to debug missing file issue
+        logWriter.println("START"); //start logging
+        //..waitFor(); //attempts to debug missing file issue
 
         //////////////////////////////////////////////////////////////////////////////////////////CORE STARTS
         /// necessary varaibles
@@ -88,97 +89,109 @@ public class Driver {
             String sendCommand = ""; //variable that holds command for encrypt and resets for each menu choice
             System.out.println("Select command (password, encrypt, decrypt, history, quit): "); //print menu
             input = scanIn.nextLine().trim().toLowerCase(); //get user input
+            if(input.contains("\n")){
+                input.replaceAll("\n", "");
+            }
 
             switch (input) { //match command to process
                 case "encrypt":
-                    sendCommand.concat(input); //add command to send to encrypt
-                    sendCommand.concat(" "); // add space for arguments
+                    sendCommand = sendCommand.concat(input); //add command to send to encrypt
+                    sendCommand = sendCommand.concat(" "); // add space for arguments
 
                     historyChoice = offerHistory(); //ask if user wants to pick from history
                     if (historyChoice == -1) { //if not 
                         System.out.print("Enter argument to encrypt: "); //ask for new word
                         input = scanIn.nextLine().trim().toUpperCase(); //get user input
                         if ((!input.equals("")) && (input.matches("^[a-zA-Z]*$"))) { //if valid input
-                            sendCommand.concat(input); //add and complete command
+                            sendCommand = sendCommand.concat(input); //add and complete command
                             history.add(input); //add new word to history
                         } else {
                             System.out.print("Invalid argument"); //invalid input --> break and send to main menu
                             break;
                         }
                     } else {
-                        sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command
+                        sendCommand = sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command
                     }
                     encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
-                    encryptProcess.waitFor(); //wait for completion
+                    //encryptProcess.waitFor(); //wait for completion
                     logWriter.println(sendCommand); //send command to be logged
-                    logProcess.waitFor(); //wait for completion
-                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
-                    logProcess.waitFor(); //wait for completion
+                    //logProcess.waitFor(); //wait for completion
+                    String storeEncryptOutTemp = encryptReader.readLine();
+                    System.out.println(storeEncryptOutTemp);//print result to console
+                    logWriter.println(storeEncryptOutTemp); //print to logger
+                    //logProcess.waitFor(); //wait for completion
+                    history.add(storeEncryptOutTemp.split(" ", 2)[1]); //add encrypted to history;
+
                     break;
 
                 case "decrypt":
 
-                    sendCommand.concat(input); //add command to send to encrypt
-                    sendCommand.concat(" "); // add space for arguments
+                    sendCommand = sendCommand.concat(input); //add command to send to encrypt
+                    sendCommand = sendCommand.concat(" "); // add space for arguments
 
-                    historyChoice = offerHistory(); //ask if user wants to pick from history
+                    historyChoice = offerHistory(); //ask if user wants to pick from history                    
                     if (historyChoice == -1) { //if not 
                         System.out.print("Enter argument to decrypt: "); //ask for new word
                         input = scanIn.nextLine().trim().toUpperCase(); //get user input
                         if ((!input.equals("")) && (input.matches("^[a-zA-Z]*$"))) { //if valid input
-                            sendCommand.concat(input); //add and complete command
+                            sendCommand = sendCommand.concat(input); //add and complete command
                             history.add(input); //add new word to history
                         } else {
                             System.out.print("Invalid argument"); //invalid input --> break and send to main menu
                             break;
                         }
                     } else {
-                        sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command
+                         //System.out.println(sendCommand);
+
+                        sendCommand = sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command                        
                     }
                     encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
-                    encryptProcess.waitFor(); //wait for completion
+                    //encryptProcess.waitFor(); //wait for completion
                     logWriter.println(sendCommand); //send command to be logged
-                    logProcess.waitFor(); //wait for completion
-                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
-                    logProcess.waitFor(); //wait for completion
+                    //logProcess.waitFor(); //wait for completion
+                    //logProcess.waitFor(); //wait for completion
+                    storeEncryptOutTemp = encryptReader.readLine();
+                    System.out.println(storeEncryptOutTemp);//print result to console
+                    logWriter.println(storeEncryptOutTemp); //print to logger
+                    history.add(storeEncryptOutTemp.split(" ", 2)[1]); //add encrypted to history;
+
                     break;
 
                 case "password":
-                    sendCommand.concat(input); //add command to send to change passkey
-                    sendCommand.concat(" "); // add space for arguments
+                    sendCommand = sendCommand.concat("PASSKEY"); //add command to send to change passkey
+                    sendCommand = sendCommand.concat(" "); // add space for arguments
 
                     System.out.print("Enter new passkey: "); //ask for new word
                     input = scanIn.nextLine();
                     if ((!input.equals("")) && (input.matches("^[a-zA-Z]*$"))) { //if valid input
                         input = input.trim().toUpperCase();
-                        sendCommand.concat(input); //complete command to send to change passkey
+                        sendCommand = sendCommand.concat(input); //complete command to send to change passkey
 
                     } else {
                         System.out.print("Invalid argument"); //invalid input --> break and send to main menu
                         break;
                     }
-                    encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
-                    encryptProcess.waitFor(); //wait for completion
-                    logWriter.println(sendCommand); //send command to be logged
-                    logProcess.waitFor(); //wait for completion
-                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
-                    logProcess.waitFor(); //wait for completion
 
+                    encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
+                    logWriter.println(sendCommand); //send command to be logged
+                    storeEncryptOutTemp = encryptReader.readLine();
+                    System.out.println(storeEncryptOutTemp);//print result to console
+                    logWriter.println(storeEncryptOutTemp); //print to logger
                     break;
 
                 case "history":
                     printHistory();
-                    sendCommand.concat(input); //add command to send to check history
+                    sendCommand = sendCommand.concat(input); //add command to send to check history
                     logWriter.println(sendCommand); //send command to be logged
-                    logProcess.waitFor(); //wait for completion
+                    //logProcess.waitFor(); //wait for completion
                     break;
 
                 case "quit":
-                    sendCommand.concat(input); //add command to send to quit
+                    sendCommand =  sendCommand.concat(input); //add command to send to quit
                     logWriter.println(sendCommand); //send command to be logged
-                    logProcess.waitFor(); //wait for completion
+                    //logProcess.waitFor(); //wait for completion
                     encryptWriter.println(sendCommand); //send command to be logged
-                    encryptProcess.waitFor();//wait for completion
+                    //encryptProcess.waitFor();//wait for completion
                     encryptReader.close(); //close streams
                     scanIn.close(); //close streams
                     System.exit(0); //exit program

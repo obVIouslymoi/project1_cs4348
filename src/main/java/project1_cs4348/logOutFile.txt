@@ -1,1 +1,7 @@
-2025-03-17 23:17 [START] Logging Started
+2025-03-18 01:11 [START] Logging Started
+2025-03-18 01:11 [RESULT] Password set
+2025-03-18 01:11 [RESULT] OIWWC
+2025-03-18 01:11 [RESULT] HELLO
+Exception in thread "main" java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at project1_cs4348.Logger.main(Logger.java:16)

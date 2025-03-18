@@ -12,7 +12,7 @@ public class Logger {
         //Logger log  = new Logger(args[0]);
         Scanner scanIn = new Scanner(System.in);
         while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
-            String userLineInput = scanIn.nextLine().trim(); //get user input   
+            String userLineInput = scanIn.nextLine().trim(); //get user input  
             
             if (!userLineInput.contains(" ")) { //check if 1 word
                 switch (userLineInput.toUpperCase().trim()) { //call correct log message based on command (single word commands)
