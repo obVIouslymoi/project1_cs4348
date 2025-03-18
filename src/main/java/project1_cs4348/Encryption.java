@@ -3,33 +3,48 @@ package project1_cs4348;
 import java.util.Scanner;
 
 public class Encryption {
+
     static String key = null;
 
-   public static void main(String[] args) {
-       Scanner scanIn = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanIn = new Scanner(System.in);
         while (scanIn.hasNextLine()) { //loop while there are user inputs
-            String line = scanIn.nextLine(); 
-            String[] wordsArr = line.split(" ", 2); //split command and message                      
-            String command = wordsArr[0].toUpperCase().trim(); //first word is command and turn to all caps
-            String argument = wordsArr[1].toUpperCase().trim(); //second part is arguments
+            String line = scanIn.nextLine().trim();
 
-            switch (command) { //match function with command
-                case "ENCRYPT":
-                    encrypt(argument);
-                    break;
-
-                case "DECRYPT":
-                    decrypt(argument);
-                    break;
-                
-                case "PASSKEY":
-                    setKey(argument);
-                    break;
+            if (line.equalsIgnoreCase("QUIT")) { //check if quit
+                scanIn.close();
+                return;
             }
-            
+            if (!line.contains(" ")) {
+                System.out.println("ERROR Not Enough Arguments");
+            } else {
+                String[] wordsArr = line.split(" ", 2); //split command and message                      
+                String command = wordsArr[0].toUpperCase().trim(); //first word is command and turn to all caps
+                String argument = wordsArr[1].toUpperCase().trim(); //second part is arguments
+
+                switch (command) { //match function with command
+                    case "ENCRYPT":
+                        encrypt(argument);
+                        break;
+
+                    case "DECRYPT":
+                        decrypt(argument);
+                        break;
+
+                    case "PASSKEY":
+                        setKey(argument);
+                        break;
+
+                    default:
+                        System.out.println("ERROR Invalid Command");
+                        break;
+
+                }
+            }
+
         }
-        scanIn.close();
-   }
+    }
+
     public static String applyCipher(String input, boolean cipherDirection) { //method to encrypt/decrypt --> true = encrypt | false = decrypt
         String outcome = ""; //initialize final word to be printed
         char inEach; //initialize char variable to track each letter of words

@@ -223,3 +223,24 @@ March 17, 2025 - 6:36 PM
 I had to go back and make both files executable on their own. Now I will be working on the process files.
 
 -------------------------------------------------------------------
+
+March 17, 2025 - 6:43 PM
+
+Looking at CPU.java, I am making my gameplan for Driver
+
+Driver gets input from the user in a loop
+  - print menu + options
+  - scanner + while nextLine() loop
+  - create/reset empty string
+  - validity check both below
+  - get command
+  - get arguments
+  - append both above to get one string
+  - depending on command call logger and encryption process if needed
+  - wait for completion of the/both programs(s)
+  - 
+
+
+
+
+-------------------------------------------------------------------

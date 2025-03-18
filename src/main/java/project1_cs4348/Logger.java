@@ -11,26 +11,40 @@ public class Logger {
     public static void main(String[] args) {
         Scanner scanIn = new Scanner(System.in);
         while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
-            String userLineInput = scanIn.nextLine().toUpperCase().trim(); //get user input                                       
-            switch (userLineInput) { //call correct log message based on command
-                case "START":
-                    logStart();
-                    break;
+            String userLineInput = scanIn.nextLine().trim(); //get user input   
+            
+            if (!userLineInput.contains(" ")) { //check if 1 word
+                switch (userLineInput.toUpperCase().trim()) { //call correct log message based on command
+                    case "START":
+                        logStart();
+                        break;
+                        
+                    case "QUIT":
+                        logQuit();
+                        return;
                     
-                case "QUIT":
-                    logQuit();
-                    break;
-                
-                case "HISTORY":
-                    logHistory();
-                    break;
+                    case "HISTORY":
+                        logHistory();
+                        break;
+                        
+                    default:
+                        System.out.println(time + " ERROR Invalid Action");
+                        break;
+                       
+                }
+            } else {
+                String[] wordsArr = userLineInput.split(" ", 2); //split command and message                      
+                String action = wordsArr[0].toUpperCase().trim(); //first word is action and turn to all caps
+                String message = wordsArr[1].trim(); //second part is message
 
-                default:
-                    logEncrypt(userLineInput);
-            }
-
+                if ((action.equalsIgnoreCase("RESULT")) ||(action.equalsIgnoreCase("ERROR")) ) {
+                    System.out.println(time + " [" + action + "] " + message);
+                }
+                else{
+                    System.out.println(time + " [ERROR] Invalid Action");
+                }
         }
-        scanIn.close();
+    }
     }
 
     public static void logStart() { //log message for starting
@@ -40,14 +54,6 @@ public class Logger {
 
     public static void logQuit() {//log message for quitting
         System.out.println(time + " [QUIT] Logging Ended");
-        return;
-    }
-
-    public static void logEncrypt(String inputLine) { //log message for recording all encrypts and decrypts
-        String[] wordsArr = inputLine.split(" ", 2); //split command and message                      
-        String action = wordsArr[0].toUpperCase(); //first word is action and turn to all caps
-        String message = wordsArr[1]; //second part is message
-        System.out.println(time + " [" + action + "] " + message);
         return;
     }
 
