@@ -1,24 +1,26 @@
 Hello!
 
-The code consists of 3 files: Logger.java, Encryption.java, Driver.java. 
-
-Logger:
-The logger takes input from both the Driver and the Encryption (only when there is an ERROR or RESULT of a word being encrypted, decrypted, or set as the passkey).
-
-Encryption:
-The encryption takes input from the Driver and encrypts, decrypts, or sets a word as a passkey. This output is then sent to the looger to be logged.
+The code consists of 3 files: Logger.java, Encryption.java, Driver.java. All 3 are executable on their own. 
 
 Driver:
-The Driver takes input from the user and passes it through both above programs to complete successfully.
+The Driver presents a menu of options to the user. The program then takes the input and acts accordingly after the input is validated. Depending on the choice, the program will act as below:
 
-All 3 programs can be run individually, and they do. Logger and Encryption is STDIN nad STDOUT when run on their own. This works completely. 
-These are all done through the use of pipes. To run the program through the terminal, please use "java Driver.java".
+    - History: Display all past encryption inputs and outputs
+    - Quit: End the program and all its processes
+    - Password: Set a passkey through Encryption.java
+    - Encrypt/Decrypt: Complete cipher action through Encryption.java (if there is a passkey set)
+    
+For all actions and results, there is a log entry made to a separate file through Logger.java
 
-When I combined with the Driver, I was able to make it work, but then changed something. This led to my Logger and Encryption files not being able to be found by the Driver. 
-As much as I tried, I could not complete this in time. I have added comments, explantations and commits to explain my code, work, and through process. This is also seen in my dev log.
-I am submitting what I can now, and will keep trying after the deadline. Sorry and thank you.
-
-UPDATE: The program works in its entirety! To run, please use "java Driver.java" in the terminal. Thank you!
+As all 3 files are executable with STD IN/OUT, all inter-file communication is set up through the Process and Processbuilder classes.
 
 
-UPDATE: The program works in its entirety! To run, please use "java Driver.java" in the terminal. Thank you!
+Logger:
+The logger takes input from the user. Depending on the action and message, the log records the activity with a timestamp and re-formats the input.
+
+Encryption:
+The encryption takes input from the user. The input is a line where the first word is the action and the second part is the argument. Depending on the command, the program can encrypt, decrypt, and set passwords to an alphabet string. The cipher's logic is integrated. The output will print whether it was a success or not.
+
+
+ To run the program through the terminal, please use "java Driver.java" when in the ~/src/main directory.
+

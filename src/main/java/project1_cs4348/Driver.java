@@ -36,8 +36,8 @@ public class Driver {
             System.out.println("Select word by entering its corresponding number: ");
             int choice = -1; //default no choice
             try { //loop until valid choice is entered
-                choice = Integer.parseInt(scanIn.nextLine()); //get vchocie from user
-                if (choice == -1) { 
+                choice = Integer.parseInt(scanIn.nextLine()); //get choice from user
+                if ((choice == -1)||(choice == 0)) { 
                     return choice; 
                 }
                 while (!((choice > 0) && (choice <= (history.size()-1)))) { //check if valid inputs
