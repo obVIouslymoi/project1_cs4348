@@ -1,14 +1,29 @@
 package project1_cs4348;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter; 
-import java.util.Scanner; //imports and packages
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class Logger {
-    static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM"); //intialize date format to timestap the logs
-    static String time = LocalDateTime.now().format(dateFormat); //get time and make it accessible for all methods
+    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm"); //intialize date format to timestap the logs
+    static String time = dateFormat.format(new Date()); //get time and make it accessible for all methods
+    //FileWriter logFile = null;
+    //PrintWriter logWriter = null;
+
+    /*public Logger(String xlogFile){
+        try {
+            logFile = new FileWriter(xlogFile);
+            //logWriter = new PrintWriter(logFile);
+
+        } catch (IOException e) {
+            System.out.println("[ERROR] File not created");
+        }
+        logWriter = new PrintWriter(logFile);
+        System.out.println("heloooo");
+    }*/
 
     public static void main(String[] args) {
+        //Logger log  = new Logger(args[0]);
         Scanner scanIn = new Scanner(System.in);
         while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
             String userLineInput = scanIn.nextLine().trim(); //get user input   
@@ -28,7 +43,7 @@ public class Logger {
                         break;
                         
                     default:
-                        System.out.println(time + " ERROR Invalid Action");
+                    System.out.println(time + " ERROR Invalid Action");
                         break;
                        
                 }
@@ -49,17 +64,14 @@ public class Logger {
 
     public static void logStart() { //log message for starting
         System.out.println(time + " [START] Logging Started");
-        return;
     }
 
     public static void logQuit() {//log message for quitting
         System.out.println(time + " [QUIT] Logging Ended");
-        return;
     }
 
     public static void logHistory() {//log message for notifying that history was checked
         System.out.println(time + " [HISTORY] History Checked.");
-        return;
     }
     
 }

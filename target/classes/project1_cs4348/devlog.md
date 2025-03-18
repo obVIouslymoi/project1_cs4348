@@ -223,3 +223,60 @@ March 17, 2025 - 6:36 PM
 I had to go back and make both files executable on their own. Now I will be working on the process files.
 
 -------------------------------------------------------------------
+
+March 17, 2025 - 6:43 PM
+
+Looking at CPU.java, I am making my gameplan for Driver
+
+Driver gets input from the user in a loop
+  - print menu + options
+  - scanner + while nextLine() loop
+  - create/reset empty string
+  - validity check both below
+  - get command
+  - get arguments
+  - append both above to get one string
+  - depending on command call logger and encryption process if needed
+  - wait for completion of the/both programs(s)
+  - 
+
+  - create both processes
+  - create file for log
+  - redirect output for logger there
+  - connect encryption output to logger input
+  - make sure menu options are also sent to logger input
+  - create an array list --> append all successful en/decryption to history and allow selection
+
+
+- allow people to choose from history
+- use array list + numbered by index
+-------------------------------------------------------------------
+March 17, 2025 - 7: 13 PM
+
+Starting Driver
+- starting with creating processes
+
+
+-------------------------------------------------------------------
+March 17, 2025 - 11: 01 PM
+
+I have created an process streams for the following:
+- Driver writes to Encryption
+- Encryption output writes to Logger input
+- Driver writes to Logger
+
+These are seeming to work, but now I am running into the error that my Logger.java and Encryption.java files cannot be found even though they are in the same package. I switched from using the given Process (as it was deprecated) to ProcessBuilder, but I am not sure why my files are not found. I am debugging now. Once that is complete, I will complete my driver file.
+
+This is the error I am getting when I use my IDE to run:
+
+Error: Could not find or load main class Logger.java
+Caused by: java.lang.ClassNotFoundException: Logger.java
+
+-------------------------------------------------------------------
+
+
+
+
+
+
+

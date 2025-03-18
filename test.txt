@@ -1,3 +1,0 @@
-2025-03-74 22:03 [START] Logging Started.
-2025-03-74 22:03 [TEST] Run this once.
-2025-03-74 22:03 [RECORD] This is line 3.
