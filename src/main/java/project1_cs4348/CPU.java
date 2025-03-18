@@ -1,5 +1,10 @@
-/*import java.lang.*;
-import java.io.*;
+package project1_cs4348;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.lang.*;
 import java.util.Scanner;
 
 public class CPU
@@ -41,4 +46,4 @@ public class CPU
 	}
 }
 
-*/
+

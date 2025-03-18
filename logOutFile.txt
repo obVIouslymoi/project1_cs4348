@@ -1,0 +1,2 @@
+Error: Could not find or load main class Logger.java
+Caused by: java.lang.ClassNotFoundException: Logger.java

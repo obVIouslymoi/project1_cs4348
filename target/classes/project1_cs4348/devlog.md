@@ -187,3 +187,103 @@ Thoughts/Gameplan:
 --> ask for command (part of loop)
 
 -------------------------------------------------------------------
+
+March 17, 2025 - 1:45 PM
+
+When attempting to complete the driver program, I realized that all my functions/methods for both Encryption and Logger were too "cetralized". I need to separate them so the the processes created in Driver can more easily access and use them. I will now work on this before/while working on the driver program. To make sure I can safely test this, I have opened this new branch.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 3:00 PM
+
+I drew down word-map sort of diagram to better understand the project. I think this worked. I have now turned the Encryption program into purely methods that are completed through 1 line of user inputs. I am about to do the same for the Logger file. Once that is also completed, I will set up the pipes for the Driver program.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 4:16 PM
+
+I found the project overview video and found that my initial understanding was flipped. I will now be rewriting the code so that both encryption and logger only interact with standard input and output. I will be doing this is smaller chunks to make sure i don't miss details.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 5:16 PM
+
+I have reduced Encryption to 4 basic functions. This should be complete and error-checking will be written into Driver instead. Will do the same to Logger now.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 5:56 PM
+
+Both are files are done. I will now move on to working on the Driver file. I will be rewatching the video to make sure my understanding is correct, and I will push this branch to the main branch. For the Driver file, I need to add error checks for inputs and pipes to redirect input/output. I also need to create a loop similar to what was initially doen for Encryption to get user input for the menu.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 6:36 PM
+
+I had to go back and make both files executable on their own. Now I will be working on the process files.
+
+-------------------------------------------------------------------
+
+March 17, 2025 - 6:43 PM
+
+Looking at CPU.java, I am making my gameplan for Driver
+
+Driver gets input from the user in a loop
+  - print menu + options
+  - scanner + while nextLine() loop
+  - create/reset empty string
+  - validity check both below
+  - get command
+  - get arguments
+  - append both above to get one string
+  - depending on command call logger and encryption process if needed
+  - wait for completion of the/both programs(s)
+  - 
+
+  - create both processes
+  - create file for log
+  - redirect output for logger there
+  - connect encryption output to logger input
+  - make sure menu options are also sent to logger input
+  - create an array list --> append all successful en/decryption to history and allow selection
+
+
+- allow people to choose from history
+- use array list + numbered by index
+-------------------------------------------------------------------
+March 17, 2025 - 7: 13 PM
+
+Starting Driver
+- starting with creating processes
+
+
+-------------------------------------------------------------------
+March 17, 2025 - 11: 01 PM
+
+I have created an process streams for the following:
+- Driver writes to Encryption
+- Encryption output writes to Logger input
+- Driver writes to Logger
+
+These are seeming to work, but now I am running into the error that my Logger.java and Encryption.java files cannot be found even though they are in the same package. I switched from using the given Process (as it was deprecated) to ProcessBuilder, but I am not sure why my files are not found. I am debugging now. Once that is complete, I will complete my driver file.
+
+This is the error I am getting when I use my IDE to run:
+
+Error: Could not find or load main class Logger.java
+Caused by: java.lang.ClassNotFoundException: Logger.java
+
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+March 17, 2025 - 11: 45 PM
+
+Because I am running out of time, I have went back and added comments and clead up my main 3 files. My code did run at one point but I'm not sure what I changed and why some files are now not able to be found. I'm sorry about this. I have provided as much work and explanation as I can through my comments, code files, commits, commit titles, and devlog log posts. I will keep trying to fix this before I submit. For now, I will merge this branch to ensure that my code files are updated and keep trying. Sorry again.
+-------------------------------------------------------------------
+
+
+
+
+
+
+
+

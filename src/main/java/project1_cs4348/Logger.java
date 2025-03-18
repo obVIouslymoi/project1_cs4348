@@ -1,49 +1,63 @@
 package project1_cs4348;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner; //imports and packages
 
-public class Logger {                                                                  
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
-    public static void handleInput(String fileName) { //essentially the entire logger program that can be called and takes in the name of file
-        FileWriter fileWriter;
-        PrintWriter printWriter;
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM");
-        //intialize all file writer and print writer to create/write to file that is accessible by entire method + date format to timestap the logs
-
-        try { //try-catch to make sure the program only runs if files are created --> allows for less errors and easy handling
-            fileWriter = new FileWriter(fileName); //create new file with given name
-            printWriter = new PrintWriter(fileWriter); //writes to newly created file
-            Scanner scanIn = new Scanner(System.in); //create new scanner to get user input                             
-        
-            while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
-                String userLineInput = scanIn.nextLine(); //get user input                                       
-                if (userLineInput.equalsIgnoreCase("QUIT")){  //check if command is quit
-                    scanIn.close();
-                    fileWriter.close(); 
-                    printWriter.close();                                                                
-                    System.exit(0);  
-                    //gracefully close all outputs and exit                                                    
+public class Logger {
+    static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm"); //intialize date format to timestap the logs
+    static String time = dateFormat.format(new Date()); //get time and make it accessible for all methods
+    
+    public static void main(String[] args) {
+        //Logger log  = new Logger(args[0]);
+        Scanner scanIn = new Scanner(System.in);
+        while (scanIn.hasNextLine()) { //loop while there are user inputs                                       
+            String userLineInput = scanIn.nextLine().trim(); //get user input   
+            
+            if (!userLineInput.contains(" ")) { //check if 1 word
+                switch (userLineInput.toUpperCase().trim()) { //call correct log message based on command (single word commands)
+                    case "START":
+                        logStart();
+                        break;
+                        
+                    case "QUIT":
+                        logQuit();
+                        return;
+                    
+                    case "HISTORY":
+                        logHistory();
+                        break;
+                        
+                    default: //Invalid use of logger
+                    System.out.println(time + " ERROR Invalid Action"); //print wrong attempt
+                        break;
+                       
                 }
-                else if (!userLineInput.contains(" ")){ //check if there are no arguments provided                                     
-                    System.out.println("ERROR No arguments given"); //throw error message if only command                          
-                } 
+            } else { //multiple word commands (output from encryption file)
                 String[] wordsArr = userLineInput.split(" ", 2); //split command and message                      
-                String action =  wordsArr[0].toUpperCase(); //first word is action and turn to all caps
-                String message =  wordsArr[1]; //second part is message
-                String time = LocalDateTime.now().format(dateFormat); //get time and format as listed above
-                printWriter.println(time + " [" + action + "] " + message); //write into file in desired format
-            }
+                String action = wordsArr[0].toUpperCase().trim(); //first word is action and turn to all caps
+                String message = wordsArr[1].trim(); //second part is message
 
-        } 
-        catch (IOException e) {
-            System.out.println("File not created."); //throw error to state that file/program did not work and exit
-            return;
-        }                          
-    } 
+                if ((action.equalsIgnoreCase("RESULT")) ||(action.equalsIgnoreCase("ERROR")) ) { //print it word was successful or failed the encryption program (comes from encryption output)
+                    System.out.println(time + " [" + action + "] " + message);
+                }
+                else{ //invalid commands
+                    System.out.println(time + " [ERROR] Invalid Action");
+                }
+        }
+    }
+    }
 
+    public static void logStart() { //log message for starting
+        System.out.println(time + " [START] Logging Started");
+    }
+
+    public static void logQuit() {//log message for quitting
+        System.out.println(time + " [QUIT] Logging Ended");
+    }
+
+    public static void logHistory() {//log message for notifying that history was checked
+        System.out.println(time + " [HISTORY] History Checked.");
+    }
+    
 }
-
