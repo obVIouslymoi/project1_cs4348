@@ -38,9 +38,16 @@ public class Logger {
                 String action = wordsArr[0].toUpperCase().trim(); //first word is action and turn to all caps
                 String message = wordsArr[1].trim(); //second part is message
 
-                if ((action.equalsIgnoreCase("RESULT")) ||(action.equalsIgnoreCase("ERROR")) ) { //print it word was successful or failed the encryption program (comes from encryption output)
+                if (("RESULT".equalsIgnoreCase(action)) 
+                    ||("ERROR".equalsIgnoreCase(action))
+                    ||("ENCRYPT".equalsIgnoreCase(action))
+                    ||("DECRYPT".equalsIgnoreCase(action))
+                    ) { //print it word was successful or failed the encryption program (comes from encryption output)
                     System.out.println(time + " [" + action + "] " + message);
                 }
+                else if("PASSKEY".equalsIgnoreCase(action)) {
+                    System.out.println(time + " [" + action + "] Password is collected.");
+                } 
                 else{ //invalid commands
                     System.out.println(time + " [ERROR] Invalid Action");
                 }

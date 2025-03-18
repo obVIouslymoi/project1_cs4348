@@ -278,10 +278,21 @@ March 17, 2025 - 11: 45 PM
 
 Because I am running out of time, I have went back and added comments and clead up my main 3 files. My code did run at one point but I'm not sure what I changed and why some files are now not able to be found. I'm sorry about this. I have provided as much work and explanation as I can through my comments, code files, commits, commit titles, and devlog log posts. I will keep trying to fix this before I submit. For now, I will merge this branch to ensure that my code files are updated and keep trying. Sorry again.
 -------------------------------------------------------------------
+
 March 18, 2025 - 1: 10 PM
 
-I continued working after the initial submission and found that the missign class files were due to specification on the IDE. I then used the terminal to run my programs and found that they were able to find the files. I also found that I was unneccesarily using waitFor() as my process writes had auto flush. This was causing an issue, but it was gone once I commented them out. Now that I coudl run, my files I saw a few smaller changes that I made. I also found out why my user inputs are not logging properly, and it was becasue I did not accoutn for the change in wording Once I fix this, I shoudld be done. I will turn it is again after.
+I continued working after the initial submission and found that the missign class files were due to specification on the IDE. I then used the terminal to run my programs and found that they were able to find the files. I also found that I was unneccesarily using waitFor() as my process writes had auto flush. This was causing an issue, but it was gone once I commented them out. Now that I could run, my files I saw a few smaller changes that I made. I also found out why my user inputs are not logging properly, and it was becasue I did not accoutn for the change in wording Once I fix this, I shoudld be done. I will turn it is again after.
+
 -------------------------------------------------------------------
+
+March 18, 2025 - 1:36 PM
+
+Programs completed! I went through and fixed final bugs and will now me turnign in my final project. I am so sorry for the late submission, thank you for your understanding.
+
+
+-------------------------------------------------------------------
+
+
 
 
 

@@ -32,11 +32,14 @@ public class Driver {
         System.out.println("Would you like to use the history? (Y/N)");
         if ((scanIn.nextLine().trim().toUpperCase().equals("Y"))) {
             printHistory();
-            System.out.println("[-1] Return to Main Menu)");
+            System.out.println("[-1] Return to enter new word)");
             System.out.println("Select word by entering its corresponding number: ");
             int choice = -1;
             try {
                 choice = Integer.parseInt(scanIn.nextLine());
+                if (choice == -1) {
+                    return choice;
+                }
                 while (!((choice > 0) && (choice <= (history.size()-1)))) {
                     choice = Integer.parseInt(scanIn.nextLine());
                     
