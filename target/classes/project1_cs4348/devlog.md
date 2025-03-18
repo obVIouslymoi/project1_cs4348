@@ -274,6 +274,13 @@ Caused by: java.lang.ClassNotFoundException: Logger.java
 
 -------------------------------------------------------------------
 
+-------------------------------------------------------------------
+March 17, 2025 - 11: 45 PM
+
+Because I am running out of time, I have went back and added comments and clead up my main 3 files. My code did run at one point but I'm not sure what I changed and why some files are now not able to be found. I'm sorry about this. I have provided as much work and explanation as I can through my comments, code files, commits, commit titles, and devlog log posts. I will keep trying to fix this before I submit. For now, I will merge this branch to ensure that my code files are updated and keep trying. Sorry again.
+-------------------------------------------------------------------
+
+
 
 
 

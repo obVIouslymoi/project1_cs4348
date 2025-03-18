@@ -19,35 +19,37 @@ import java.util.Scanner; //imports and packages
  */
 public class Driver {
 
-    static ArrayList<String> history = new ArrayList<String>();
-    static Scanner scanIn = new Scanner(System.in);
+    static ArrayList<String> history = new ArrayList<String>(); //array list that stores history
+    static Scanner scanIn = new Scanner(System.in); //scanner
 
-    public static void printHistory() {
+    public static void printHistory() { //prints all entries in history (used for listing past entries and when history command is selelcted)
         for (int i = 0; i != history.size(); i++) {
             System.out.println("[" + i + "] " + history.get(i));
         }
     }
 
-    public static int offerHistory() {
+    public static int offerHistory() { //asks user if they want history and returns index of desired past entry; returns -1 if they don't want to or change their mind
         System.out.println("Would you like to use the history? (Y/N)");
         if ((scanIn.nextLine().trim().toUpperCase().equals("Y"))) {
             printHistory();
             System.out.println("[-1] Return to Main Menu)");
             System.out.println("Select word by entering its corresponding number: ");
-            while (true) {
-                try {
-                    return scanIn.nextInt();
-                } catch (Exception e) {
-                    System.out.println("Incorrect selection format. Please enter number only.");
+            int choice = -1;
+            try {
+                choice = scanIn.nextInt();
+                while ((choice < 0) && (choice > (history.size()-1))) {
+                    choice = scanIn.nextInt();
                 }
+            } catch (Exception e) {
+                System.out.println("ERROR Invalid type");
             }
+            return choice;
         } else {
             return -1;
         }
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        System.out.println(System.getProperty("java.class.path"));
         Process logProcess = null;
         PrintWriter logWriter = null;
         Process encryptProcess = null;
@@ -55,19 +57,18 @@ public class Driver {
         PrintWriter encryptWriter = null;
 
         try {
-            // Start Logger process and redirect output to .txt
-            
-                ProcessBuilder logBuilder = new ProcessBuilder("java", "Logger.java");
+            //create logger process
+            ProcessBuilder logBuilder = new ProcessBuilder("java", "Logger.java");
             logBuilder.redirectOutput(new File("logOutFile.txt")); // redirects logger output to the file
-            logBuilder.redirectErrorStream(true);
-            logProcess = logBuilder.start();
-            OutputStream logInput = logProcess.getOutputStream();
+            logBuilder.redirectErrorStream(true);//errors to console
+            logProcess = logBuilder.start();//starts logger process
+            OutputStream logInput = logProcess.getOutputStream();//send output for logger
             logWriter = new PrintWriter(logInput, true); //writes to logger
 
-            // Encrypt
+            //create encryt process
             ProcessBuilder encryptBuilder = new ProcessBuilder("java", "Encryption.java");
-                encryptBuilder.redirectErrorStream(true);
-                encryptProcess = encryptBuilder.start();
+                encryptBuilder.redirectErrorStream(true);//errors to console
+                encryptProcess = encryptBuilder.start();//starts encryption process
                 InputStream encryptInput = encryptProcess.getInputStream();  //read encryption output
                 OutputStream encryptOutput = encryptProcess.getOutputStream();  //send input to encryption
                 encryptReader = new BufferedReader(new InputStreamReader(encryptInput)); //gives output of encrypt
@@ -76,12 +77,12 @@ public class Driver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logWriter.println("START");
-        logProcess.waitFor();
+        logWriter.println("START"); //attempts to debug
+        logProcess.waitFor(); //attempts to debug missing file issue
 
         //////////////////////////////////////////////////////////////////////////////////////////CORE STARTS
-            /// necessary varaibles
-           String input;
+        /// necessary varaibles
+        String input;
         int historyChoice;
         while (true) { //loops until quit
             String sendCommand = ""; //variable that holds command for encrypt and resets for each menu choice
@@ -108,9 +109,11 @@ public class Driver {
                         sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command
                     }
                     encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
-                    encryptProcess.waitFor();
-                    logWriter.println(sendCommand);
-                    logProcess.waitFor();
+                    encryptProcess.waitFor(); //wait for completion
+                    logWriter.println(sendCommand); //send command to be logged
+                    logProcess.waitFor(); //wait for completion
+                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
+                    logProcess.waitFor(); //wait for completion
                     break;
 
                 case "decrypt":
@@ -133,9 +136,11 @@ public class Driver {
                         sendCommand.concat(history.get(historyChoice)); //valid history choice --> complete command
                     }
                     encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
-                    encryptProcess.waitFor();
-                    logWriter.println(sendCommand);
-                    logProcess.waitFor();
+                    encryptProcess.waitFor(); //wait for completion
+                    logWriter.println(sendCommand); //send command to be logged
+                    logProcess.waitFor(); //wait for completion
+                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
+                    logProcess.waitFor(); //wait for completion
                     break;
 
                 case "password":
@@ -152,33 +157,36 @@ public class Driver {
                         System.out.print("Invalid argument"); //invalid input --> break and send to main menu
                         break;
                     }
+                    encryptWriter.println(sendCommand); //send command to encryption process to be completed by process
+                    encryptProcess.waitFor(); //wait for completion
+                    logWriter.println(sendCommand); //send command to be logged
+                    logProcess.waitFor(); //wait for completion
+                    logWriter.println(encryptReader.readLine()); //send output of encryption to be logged
+                    logProcess.waitFor(); //wait for completion
 
-                    
                     break;
 
                 case "history":
-
+                    printHistory();
+                    sendCommand.concat(input); //add command to send to check history
+                    logWriter.println(sendCommand); //send command to be logged
+                    logProcess.waitFor(); //wait for completion
                     break;
 
                 case "quit":
-                    // encryptWriter.println("quit"); // Tell Encryptor to terminate
-                    logWriter.println("quit"); // Tell Logger to terminate
-                    scanIn.close();
-                    return;
+                    sendCommand.concat(input); //add command to send to quit
+                    logWriter.println(sendCommand); //send command to be logged
+                    logProcess.waitFor(); //wait for completion
+                    encryptWriter.println(sendCommand); //send command to be logged
+                    encryptProcess.waitFor();//wait for completion
+                    encryptReader.close(); //close streams
+                    scanIn.close(); //close streams
+                    System.exit(0); //exit program
 
                 default:
-                    System.out.print("Invalid command. Retry");
+                    System.out.println("Invalid command. Retry"); //invalid entry for command but while loop continues
             }
 
-            
-/* 
-        } catch (IOException ex) {
-            System.out.println("Error starting processes.");
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            System.out.println("Process execution interrupted.");
-        }
-             */
         }
     }
 }
