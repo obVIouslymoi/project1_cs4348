@@ -18,6 +18,8 @@ When I combined with the Driver, I was able to make it work, but then changed so
 As much as I tried, I could not complete this in time. I have added comments, explantations and commits to explain my code, work, and through process. This is also seen in my dev log.
 I am submitting what I can now, and will keep trying after the deadline. Sorry and thank you.
 
+UPDATE: The program works in its entirety! To run, please use "java Driver.java" in the terminal. Thank you!
+
 
 
 
